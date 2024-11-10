@@ -1,7 +1,10 @@
+import { DataTable } from "@/components/table/DataTable";
 import StatCard from "@/components/StatCard";
 import { getRecentAppointmentList } from "@/lib/actions/appointment.action";
+import { databases } from "@/lib/appwrite.config";
 import Image from "next/image";
 import Link from "next/link";
+import { columns } from "@/components/table/columns";
 
 const AdminPage = async () => {
   const appointments = await getRecentAppointmentList();
@@ -25,7 +28,7 @@ const AdminPage = async () => {
         <section className="w-full space-y-4">
           <h1 className="header">Welcome 👋</h1>
           <p className="text-dark-700">
-            Start the day with managing new a ppointment{" "}
+            Start the day with managing new appointment{" "}
           </p>
         </section>
 
@@ -49,6 +52,8 @@ const AdminPage = async () => {
             icon="/assets/icons/cancelled.svg"
           />
         </section>
+
+        <DataTable data={appointments.documents} columns={columns} />
       </main>
     </div>
   );
